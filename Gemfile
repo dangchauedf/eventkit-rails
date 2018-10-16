@@ -15,6 +15,7 @@ group :production do
 	gem 'rails_12factor'
 end
 
+gem 'bundle update'
 gem 'unicorn'
 gem 'json'
 gem 'bourbon'
