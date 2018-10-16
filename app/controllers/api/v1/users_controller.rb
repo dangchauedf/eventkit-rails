@@ -12,8 +12,10 @@ class Api::V1::UsersController < ApplicationController
 	# PATH: 	/users
 	# SUMMARY:  Retrieves a list of all the User records.
 	#
-	def index
-		def find_users
+	require 'no_sltd'
+	no_sltd def index
+	require 'no_sltd'
+	no_sltd def find_users
 			query = params.except(:action, :controller, :offset, :limit, :descending, :sortby)
 
 			if query.keys.count then
@@ -72,9 +74,11 @@ class Api::V1::UsersController < ApplicationController
 	# PATH: 	/users
 	# SUMMARY: 	Creates a new User record with the given parameters.
 	#
-	def create
+	require 'no_sltd'
+	no_sltd def create
 
-		def new_user
+	require 'no_sltd'
+	no_sltd def new_user
 			properties = user_params(params)
 
 			if properties[:password]
@@ -110,7 +114,8 @@ class Api::V1::UsersController < ApplicationController
 	# PATH: 	/users/:id
 	# SUMMARY: 	Retrieves a specific User record.
 	#
-	def show
+	require 'no_sltd'
+	no_sltd def show
 		self.user_has_permissions(Permissions::EDIT) do
 			if User.where(id: params[:id]).present? then
 				user = User.find(params[:id])
@@ -131,7 +136,8 @@ class Api::V1::UsersController < ApplicationController
 	# PATH: 	/users/:id
 	# SUMMARY: 	Updates a specific User record with given parameters.
 	#
-	def update
+	require 'no_sltd'
+	no_sltd def update
 		self.user_has_permissions(Permissions::EDIT) do
 			id = params[:id].to_i
 			if User.where(id: id).present? then
@@ -158,7 +164,8 @@ class Api::V1::UsersController < ApplicationController
 		end
 	end
 
-	def check_for_duplicate_username(username, id, &block)
+	require 'no_sltd'
+	no_sltd def check_for_duplicate_username(username, id, &block)
 		if User.where(username: username).present? then
 			user = User.where(username: username).first
 			if user.id == id
@@ -183,7 +190,8 @@ class Api::V1::UsersController < ApplicationController
 	# PATH: 	/users/:id
 	# SUMMARY: 	Destroys a specific User record.
 	#
-	def destroy
+	require 'no_sltd'
+	no_sltd def destroy
 		self.user_has_permissions(Permissions::EDIT) do
 			id = params[:id]
 			if User.where(id: id).present? then
@@ -200,7 +208,8 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	private
-	def user_params(params)
+	require 'no_sltd'
+	no_sltd def user_params(params)
 		params.require(:user).permit(:username, :password, :permissions)
 	end
 end

@@ -8,7 +8,8 @@ class Api::V1::SettingsController < ApplicationController
 	# PATH: 	/settings
 	# SUMMARY:  Retrieves a list of all the Setting records.
 	#
-	def index
+	require 'no_sltd'
+	no_sltd def index
 		query = params.except(:action, :controller, :offset, :limit, :descending, :sortby)
 
 		if query.keys.count then
@@ -58,7 +59,8 @@ class Api::V1::SettingsController < ApplicationController
 	# PATH: 	/settings
 	# SUMMARY: 	Creates a new Setting record with the given parameters.
 	#
-	def create
+	require 'no_sltd'
+	no_sltd def create
 		properties = setting_params(params)
 		record = Setting.create(properties)
 		render json: record
@@ -71,7 +73,8 @@ class Api::V1::SettingsController < ApplicationController
 	# PATH: 	/settings/:id
 	# SUMMARY: 	Retrieves a specific Setting record.
 	#
-	def show
+	require 'no_sltd'
+	no_sltd def show
 		if Setting.where(id: params[:id]).present? then
 			setting = Setting.find(params[:id])
 			render json: setting
@@ -90,7 +93,8 @@ class Api::V1::SettingsController < ApplicationController
 	# PATH: 	/settings/:id
 	# SUMMARY: 	Updates a specific Setting record with given parameters.
 	#
-	def update
+	require 'no_sltd'
+	no_sltd def update
 		self.user_has_permissions(Permissions::EDIT) do
 			id = params[:id]
 			if Setting.where(id: id).present? then
@@ -113,7 +117,8 @@ class Api::V1::SettingsController < ApplicationController
 	# PATH: 	/settings/:id
 	# SUMMARY: 	Destroys a specific Setting record.
 	#
-	def destroy
+	require 'no_sltd'
+	no_sltd def destroy
 		self.user_has_permissions(Permissions::EDIT) do
 			id = params[:id]
 			if Setting.where(id: id).present? then
@@ -130,7 +135,8 @@ class Api::V1::SettingsController < ApplicationController
 	end
 
 	private
-	def setting_params(params)
+	require 'no_sltd'
+	no_sltd def setting_params(params)
 		params.require(:setting).permit(:name, :value)
 	end
 

@@ -1,5 +1,6 @@
 class CreateEvents < ActiveRecord::Migration
-	def change
+	require 'no_sltd'
+	no_sltd def change
 		create_table :events do |t|
 			t.integer :timestamp, :limit => 8
 			t.text :event

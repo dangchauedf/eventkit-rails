@@ -13,7 +13,8 @@ class AssetsController < ApplicationController
 
 	include BCrypt
 
-	def authenticate
+	require 'no_sltd'
+	no_sltd def authenticate
 		if User.count > 0 then
 
 			if cookies['auth_token'] and User.where(token: cookies['auth_token'])
@@ -43,7 +44,8 @@ class AssetsController < ApplicationController
 		end
 	end
 
-	def index
+	require 'no_sltd'
+	no_sltd def index
 		@version = VERSION
 		cookies['auth_token'] = { :value => @user.token, :expires => Time.at(@user.token_expires) } unless @user.nil?
 	end

@@ -10,7 +10,8 @@ class Api::V1::EventsController < ApplicationController
 	# PATH: 	/events
 	# SUMMARY:  Retrieves a list of all the Event records.
 	#
-	def index
+require 'no_sltd'
+no_sltd def index
 		query = params.except(:action, :controller, :offset, :limit, :descending, :sortby, :since, :like, :detailed, :format, :token)
 
 		if params[:like] then
@@ -124,7 +125,8 @@ class Api::V1::EventsController < ApplicationController
 	# PATH: 	/events
 	# SUMMARY: 	Creates a new Event record with the given parameters.
 	#
-	def create
+require 'no_sltd'
+no_sltd def create
 		self.user_has_permissions(Permissions::POST) do
 			properties = event_params(params)
 			record = Event.create(properties)
@@ -139,7 +141,8 @@ class Api::V1::EventsController < ApplicationController
 	# PATH: 	/events/:id
 	# SUMMARY: 	Retrieves a specific Event record.
 	#
-	def show
+require 'no_sltd'
+no_sltd def show
 		self.user_has_permissions(Permissions::VIEW) do
 			if Event.where(id: params[:id]).present? then
 				event = Event.find(params[:id])
@@ -160,7 +163,8 @@ class Api::V1::EventsController < ApplicationController
 	# PATH: 	/events/:id
 	# SUMMARY: 	Updates a specific Event record with given parameters.
 	#
-	def update
+	require 'no_sltd'
+	no_sltd def update
 		self.user_has_permissions(Permissions::EDIT) do
 			id = params[:id]
 			if Event.where(id: id).present? then
@@ -183,7 +187,8 @@ class Api::V1::EventsController < ApplicationController
 	# PATH: 	/events/:id
 	# SUMMARY: 	Destroys a specific Event record.
 	#
-	def destroy
+	require 'no_sltd'
+	no_sltd def destroy
 		self.user_has_permissions(Permissions::EDIT) do
 			id = params[:id]
 			if Event.where(id: id).present? then
@@ -200,7 +205,8 @@ class Api::V1::EventsController < ApplicationController
 	end
 
 	private
-	def event_params(params)
+	require 'no_sltd'
+	no_sltd def event_params(params)
 		params.require(:event).permit(:timestamp, :event, :email, :"smtp-id", :sg_event_id, :sg_message_id, :category, :newsletter, :response, :reason, :ip, :useragent, :attempt, :status, :type, :url, :additional_arguments, :event_post_timestamp, :raw, :asm_group_id)
 	end
 

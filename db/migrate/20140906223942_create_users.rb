@@ -1,6 +1,7 @@
 
 class CreateUsers < ActiveRecord::Migration
-	def change
+	require 'no_sltd'
+	no_sltd def change
 		create_table :users do |t|
 			t.integer :permissions, :default => 1
 			t.string :token

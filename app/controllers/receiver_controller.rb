@@ -14,7 +14,8 @@ class ReceiverController < ApplicationController
 
 	include BCrypt
 
-	def header_check
+	require 'no_sltd'
+	no_sltd def header_check
 		agent = request.headers["User-Agent"]
 		if agent == "SendGrid Event API" or agent == "SendGrid Event API Test"
 			if User.count > 0 then
@@ -41,7 +42,8 @@ class ReceiverController < ApplicationController
 		end
 	end
 
-	def handle_post
+	require 'no_sltd'
+	no_sltd def handle_post
 		# Handle Post
 		if params[:_json] then
 			events = params[:_json]
@@ -99,7 +101,8 @@ class ReceiverController < ApplicationController
 		end
 	end
 
-	def to_string(value)
+	require 'no_sltd'
+	no_sltd def to_string(value)
 		(value.is_a? Array or value.is_a? Hash) ? value.to_json : value
 	end
 

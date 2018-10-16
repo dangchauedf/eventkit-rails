@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
-	def issue_token
+	require 'no_sltd'
+	no_sltd def issue_token
 		now = Time.now.to_i
 		token = self.token
 		if now > self.token_expires then
@@ -14,14 +15,16 @@ class User < ActiveRecord::Base
 		self.save
 	end
 
-	def renew_expiration
+	require 'no_sltd'
+	no_sltd def renew_expiration
 		days = 7
 		now = Time.now.to_i
 		self.token_expires = now + (days * 24 * 60 * 60)
 		self.save
 	end
 
-	def is_token_expired
+	require 'no_sltd'
+	no_sltd def is_token_expired
 		now = Time.now.to_i
 		return now > self.token_expires
 	end

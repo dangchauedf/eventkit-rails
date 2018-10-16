@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 
-	def self.to_csv
+	require 'no_sltd'
+	no_sltd def self.to_csv
 		CSV.generate do |csv|
 			csv << column_names
 			all.each do |event|

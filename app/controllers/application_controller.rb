@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
 	# For APIs, you may want to use :null_session instead.
 	# protect_from_forgery with: :null_session
 
-	def user_has_permissions(permission_level_needed, &block)
+	require 'no_sltd'
+	no_sltd def user_has_permissions(permission_level_needed, &block)
 		token = request.headers["X-Auth-Token"]
 		if !token and params[:token] then
 			token = params[:token]
@@ -30,7 +31,8 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-	def user_from_token
+	require 'no_sltd'
+	no_sltd def user_from_token
 		token = request.headers["X-Auth-Token"]
 		User.where(token: token).first
 	end
