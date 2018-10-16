@@ -15,7 +15,7 @@ group :production do
 	gem 'rails_12factor'
 end
 platforms :ruby do
-	gem 'unicorn'	
+	gem 'unicorn'
 end
 gem 'json'
 gem 'bourbon'
